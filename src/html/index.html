@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+</head>
+<body background="../picture/wood.jpg">
+<div align="center">
+    <h1>欢迎登录个人主页</h1>
+    <input type="text" id="name"><br>
+    <input type="password" id="pwd"><br>
+    <input type="submit" onclick="submit()" value="登录">
+</div>
+</body>
+<script>
+    var xmlHttp=null
+    function GetXmlHttpObject()
+    {
+        var xmlHttp=null;
+        try
+        {
+            // Firefox, Opera 8.0+, Safari
+            xmlHttp=new XMLHttpRequest();
+        }
+        catch (e)
+        {
+            // Internet Explorer
+            try
+            {
+                xmlHttp=new ActiveXObject("Msxml2.XMLHTTP");
+            }
+            catch (e)
+            {
+                xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+        }
+        return xmlHttp;
+    }
+
+    function submit() {
+        xmlHttp=GetXmlHttpObject();
+        var url="../php/test.php"
+        var user=document.getElementById("name").value;
+        var pwd=document.getElementById("pwd").value;
+        url=url+"?user="+user+"&pwd="+pwd
+        url=url+"&sid="+Math.random()
+        xmlHttp.onreadystatechange=stateChanged
+        xmlHttp.open("GET",url,true)
+        xmlHttp.send(null)
+    }
+
+    function stateChanged()
+    {
+        if (xmlHttp.readyState==4 || xmlHttp.readyState=="complete")
+        {
+            var xmlDoc=xmlHttp.responseText;
+            if(xmlDoc!="success"){
+                window.alert("用户不存在或密码错误");
+            }else{
+                window.alert("登录成功");
+                window.location="page1.html"
+            }
+        }
+    }
+
+
+</script>
+</html>

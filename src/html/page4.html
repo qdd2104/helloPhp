@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户注册</title>
+</head>
+<body background="../picture/wood.jpg">
+<div align="center">
+    <h1>欢迎来到注册界面</h1>
+    <form>
+        <span>姓名(必填)：<input id="name" onblur="setTrue()"></span><br>
+        <span>昵称(必填)：<input id="nick" onblur="setTrue()"></span><br>
+        <span>密码(必填)：<input id="pwd" type="password" onblur="setTrue()"></span><br>
+        <span>确认密码(必填)：<input id="rePwd" type="password" onblur="checkPwd()"></span><br>
+        <span>性别(必选)：
+    <select id="sex" >
+        <option value="男">男</option>
+        <option value="女">女</option>
+    </select>
+    </span><br>
+        <span>电话(必填)：<input id="phone" type="tel" placeholder="请输入11位手机号码" onblur="checkMobile()"></span><br>
+        <span>个人爱好：
+            <div>
+    <form>
+        <label> <input name="check" type="checkbox">足球</label> 
+        <label> <input name="check" type="checkbox">篮球 </label> 
+        <label> <input name="check" type="checkbox">乒乓球 </label> 
+        <label> <input name="check" type="checkbox">羽毛球 </label> 
+    </form>
+            </div>
+        </span><br>
+        <span>电子邮箱：<input id="mail" type="email" type="email" name="email"></span><br>
+        <span>地址(选填)：<input id="address"></span><br>
+        <span>邮政编码(选填)：<input id="code" ></span><br>
+        <span>个人简介(选填)：<br>
+        <textarea rows="10" cols="50"></textarea></span><br>
+        <span>图片上传
+            <input type="file" id="picFile">
+        </span>
+        <input onclick="sign()" disabled="disabled" id="but" type="submit" value="提交">
+    </form>
+</div>
+</body>
+<script>
+    function sign() {
+        var nick=document.getElementById("nick");
+        var sex=document.getElementById("sex");
+        var a=sex.options[sex.options.selectedIndex].value;
+        var mail=document.getElementById("mail").value;
+        var count = 0;
+        var checkArry = document.getElementsByName("check");
+        for (var i = 0; i < checkArry.length; i++) {
+            if(checkArry[i].checked == true){
+                count++;
+            }
+        }
+        if( count == 0 ){
+            alert("请选择至少一项爱好！")
+        }else if(mail==''){
+            window.alert("请输入一个邮箱")
+        }else if(mail!=''&&(mail.indexOf("@")==-1)){
+            window.alert("邮箱格式错误")
+        }else{
+            var se=confirm("请确认："+nick.value+"("+a+")");
+            if(se){
+                alert("注册成功！")
+            }
+        }
+    }
+
+    function setTrue() {
+        var name=document.getElementById("name").value!='';
+        var nick=document.getElementById("nick").value!='';
+        var pwd=document.getElementById("pwd").value!='';
+        var rePwd=document.getElementById("rePwd").value==document.getElementById("pwd").value!='';
+        var phone=document.getElementById("phone").value!='';
+        if(name&&nick&&pwd&&phone&&rePwd){
+            document.getElementById("but").disabled=false;
+        }
+    }
+
+    function checkMobile() {
+        var str=document.getElementById("phone").value;
+        if(str==""){
+            alert("手机号不能为空！");
+        }
+        else{
+            var re = /^1\d{10}$/         
+            if (re.test(str)) {
+                setTrue();
+            } else {
+                alert("手机号格式错误！");
+                document.getElementById("phone").value=''
+            }
+        }
+    }
+
+    function checkPwd() {
+        var pwd=document.getElementById("pwd");
+        var rePwd=document.getElementById("rePwd");
+        if(pwd.value!=rePwd.value){
+            window.alert("两次密码不一致请重新输入");
+            rePwd.value=''
+        }
+    }
+
+</script>
+</html>
