@@ -1,3 +1,20 @@
+<?php
+#判断登录
+$_SESSION['type'] = "ADMIN";
+if(isset($_SESSION['type'])){
+    if($_SESSION['type']=="ADMIN") {
+        
+    } else {
+        echo "仅支持管理员登录";
+        die();
+    }
+    
+} else {
+    header("Location: login.php");
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
