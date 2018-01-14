@@ -1,6 +1,6 @@
 body
 {
-background-image:url('background.png');
+background-image:url('../php/admin/background.png');
 background-size: cover;
 cursor:url(nyancat.cur),auto;
 }

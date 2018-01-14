@@ -2,7 +2,7 @@
 #登录
 session_start();
 if($_REQUEST['type']=="login"){
-    $file = fopen('user.txt','r');
+    $file = fopen('../../data/user.txt','r');
     while ($data = fgetcsv($file)) {
         if($data[0]==$_REQUEST['name'])
         {
@@ -14,11 +14,15 @@ if($_REQUEST['type']=="login"){
                     die();
                 } else {
                     $_SESSION['type'] = "NORMAL";
-                    echo "该接口仅支持管理员登录";
+//                    echo "该接口仅支持管理员登录";
+                    header("Location: ../user/list.php");
+                    die();
                 }
                 break;
             } else {
                 echo "账号密码错误";
+//                header("Location: ../user/list.php");
+                header("Refresh:2;url=../../index.php");
             }
         }
     }

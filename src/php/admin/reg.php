@@ -19,7 +19,7 @@ if(isset($_SESSION['type'])){
 <html>
 <head>
 <meta charset="utf-8">
-<link rel="stylesheet" type="text/css" href="main.css">
+<link rel="stylesheet" type="text/css" href="../../css/main.css">
 <title>注册</title>
 </head>
 <body>
