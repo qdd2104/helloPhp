@@ -1,11 +1,12 @@
 <?php
 #判断登录
-$_SESSION['type'] = "ADMIN";
+session_start();
 if(isset($_SESSION['type'])){
     if($_SESSION['type']=="ADMIN") {
         
     } else {
-        echo "仅支持管理员登录";
+        echo "仅支持管理员登录<br>";
+        header("Location: entry.php");
         die();
     }
     
@@ -27,10 +28,10 @@ if(isset($_SESSION['type'])){
     <h1>欢迎访问</h1>
 </div>
 <div id="content">
-    <a href="reg.html">添加新用户</a><br>
+    <a href="reg.php">添加新用户</a><br>
     <a href="score.php">录入成绩</a><br>
     <a href="curriculum.php">录入课程</a><br>
-    <a href="self.html">网站作者介绍</a><br>
+    <a href="self.php">网站作者介绍</a><br>
     <a href="photo.php">上传测试图片</a>
 </div>
 <a href="#">< 返回</a>

@@ -1,20 +1,25 @@
 <?php
 #登录
+session_start();
 if($_REQUEST['type']=="login"){
     $file = fopen('user.txt','r');
     while ($data = fgetcsv($file)) {
-        if($data[0]==$_REQUEST['name']&&$data[1]==$_REQUEST['pwd']){
-            if($_REQUEST['name']=="admin") {
-                $_SESSION['type'] = "ADMIN";
-                header("Location: entry.php");
-                die();
+        if($data[0]==$_REQUEST['name'])
+        {
+            if($data[1]==$_REQUEST['pwd'])
+            {
+                if($_REQUEST['name']=="admin") {
+                    $_SESSION['type'] = "ADMIN";
+                    header("Location: entry.php");
+                    die();
+                } else {
+                    $_SESSION['type'] = "NORMAL";
+                    echo "该接口仅支持管理员登录";
+                }
+                break;
             } else {
-                $_SESSION['type'] = "NORMAL";
-                echo "该接口仅支持管理员登录";
+                echo "账号密码错误";
             }
-        }
-        else {
-            echo "Error";
         }
     }
 }
@@ -32,3 +37,20 @@ if($_REQUEST['type']=="login"){
 if($_REQUEST["type"]=="score") {
 file_put_contents('score.txt', $_REQUEST["name"].",".$_REQUEST["score"]."\n", FILE_APPEND|LOCK_EX);
 } ?>
+
+<?php
+#保存课表
+if($_REQUEST['type']=="addclass") {
+$output = "";
+for($week=1;$week<=7;$week++) {
+    for($count=1;$count<=5;$count++) {
+        $output .= $_REQUEST[strval($week).'x'.strval($count)];
+        $output .= '|';
+    }
+}
+file_put_contents('class.txt', $output."\n", FILE_APPEND|LOCK_EX);
+echo "添加课表成功";
+echo "<a href=\"entry.php\">返回</a>";
+}
+
+?>
