@@ -54,3 +54,24 @@ echo "<a href=\"entry.php\">返回</a>";
 }
 
 ?>
+
+
+<?php
+if($_REQUEST["type"]=="photo") { 
+    if($_FILES['photo']['name'] != '') {
+        if($_FILES['photo']['error'] > 0) {
+            echo "错误状态：".$_FILES['photo']['error'];
+        } else {
+            if($_FILES['photo']['type'] == 'image/jpeg' or $_FILES['photo']['type'] == 'image/pjpeg' or $_FILES['photo']['type'] == 'image/gif' && $_FILES['photo']['size'] < 20480){
+                move_uploaded_file($_FILES['photo']['tmp_name'] , "uploads/" . $_FILES['photo']['name']);
+                file_put_contents('photo.txt', "uploads/" . $_FILES['photo']['name'] ."\n", FILE_APPEND|LOCK_EX);
+                echo "上传成功！";
+            } else {
+                echo "请上传小于2MB的jpeg或Gif类型的附件";
+            }
+        }
+    } else {
+        echo "请上传文件！";
+    }
+}
+?>

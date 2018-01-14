@@ -58,7 +58,7 @@ if(isset($_SESSION['type'])){
     <p><small>2. 四级成绩520</small></p>
 </div>
 <div>
-	<a href="index.html"><<返回首页</a>
+	<a href="entry.php"><<返回目录</a>
 </div>
 <script>
     var position = 0;  

@@ -21,11 +21,11 @@ if(isset($_SESSION['type'])){
 <head>
 <meta charset="utf-8">
 <link rel="stylesheet" type="text/css" href="main.css">
-<title>目录</title>
+<title>添加成绩</title>
 </head>
 <body>
 <div id="title">
-    <h1>欢迎访问</h1>
+    <h1>添加成绩</h1>
 </div>
 <div id="content">
     <form name="input" action="helper.php" method="post">
@@ -39,7 +39,7 @@ if(isset($_SESSION['type'])){
     <p style="color: rgb(255,0,0)" id="notice">填写后提交</p>
     </form>
 </div>
-<a href="#">< 返回</a>
+<a href="entry.php">< 返回</a>
 </body>
 <script>
 function doSubmit() {
