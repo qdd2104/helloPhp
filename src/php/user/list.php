@@ -28,9 +28,9 @@ if(isset($_SESSION['type'])){
 </div>
 <div id="content">
     <a href="scoreList.php">显示成绩</a><br>
-    <a href="curriculum.php">显示课程</a><br>
-    <a href="self.html">显示作者介绍</a><br>
-    <a href="photo.php">显示图片</a>
+    <a href="classList.php">显示课程</a><br>
+    <a href="self.php">显示作者介绍</a><br>
+    <a href="photoList.php">显示图片</a>
 </div>
 <a href="#">< 返回</a>
 </body>

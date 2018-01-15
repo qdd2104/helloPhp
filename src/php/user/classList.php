@@ -6,11 +6,21 @@
  */
 session_start();
 if(isset($_SESSION['type'])){
-    $a="<h1>曹慎凯的成绩单</h1><br>";
     if($_SESSION['type']=="NORMAL") {
-        $file = fopen('../../data/score.csv','r');
+        $file = fopen('../../data/class.csv','r');
+        $c=1;
         while ($data = fgetcsv($file)) {
-            $a.= "<p>课程".$data[0].":成绩".$data[1]."</p><br>";
+            $a.="<tr><td>第".$c."节</td>";
+            for ($x=0; $x< count($data); $x++) {
+                $content=$data[$x];
+                if($content==""){
+                    $a.="<td></td>";
+                }else{
+                    $a.="<td>".$content."</td>";
+                }
+            }
+            $a.="</tr>";
+            $c+=1;
         }
     } else {
         echo "仅支持浏览者";
@@ -30,14 +40,29 @@ if(isset($_SESSION['type'])){
 </head>
 <body background="../../picture/wood.jpg">
 <div id="title" align="center">
-    <?php echo $a ?>
+    <h1>曹慎凯的课程表</h1>
+    <table>
+        <tr>
+            <td></td>
+            <td>周一</td>
+            <td>周二</td>
+            <td>周三</td>
+            <td>周四</td>
+            <td>周五</td>
+            <td>周六</td>
+            <td>周日</td>
+        </tr>
+        <?php echo $a ?>
+    </table>
 </div>
 <div id="content">
     <h2>请输入要查找的课程</h2>
-    <form name="showScore" action="helper.php" method="post">
-        课程名：<input type="text" id="class_name" name="class_name" onblur="checkOut()"/>
+    <form name="showClass" action="helper.php" method="post">
+        日期：<input type="text" name="week" id="week" onblur="checkOut()"/>
         <br>
-        <input type="hidden" name="type" value="searchScore">
+        课次：<input type="text" name="count" id="count" onblur="checkOut()"/>
+        <br>
+        <input type="hidden" name="type" value="searchClass">
         <input type="submit" value="提交" id="submit_button" onclick="doSubmit()" disabled/>
         <input type="reset" value="重置"/>
         <p style="color: rgb(255,0,0)" id="notice">填写后提交</p>
@@ -53,8 +78,9 @@ if(isset($_SESSION['type'])){
     }
 
     function checkOut() {
-        var nodes = document.getElementById("class_name");
-        if(nodes.value == null || nodes.value == "") {
+        var week = document.getElementById("week");
+        var count =document.getElementById("count");
+        if(week.value == null || week.value == ""||count.value == null || count.value == "") {
             document.getElementById("notice").innerText=nodes[j].name+"未填写，请填写后提交";
             return true;
         }else{

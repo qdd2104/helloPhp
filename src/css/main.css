@@ -1,8 +1,7 @@
 body
 {
-background-image:url('../php/admin/background.png');
+background-image:url('../picture/background.png');
 background-size: cover;
-cursor:url(nyancat.cur),auto;
 }
 #title
 {
@@ -150,3 +149,48 @@ ul
 {
     list-style-type: circle;
 }
+div.pic{
+    width: 200px;
+    height:200px;
+}
+div.fSet{
+    float: left;
+}
+img.aPic{
+    width: auto;
+    height: auto;
+    width: 100%;
+    height: 100%;
+}
+.tSet{
+    text-align: center;
+    color: mediumslateblue;
+}
+.ctd{
+    width: 100px;
+    height: 30px;
+}
+#headImg{
+    float: right;
+    border: 2px dashed darkorange;
+}
+#page3{
+    background-color: antiquewhite;
+}
+#wd:hover{
+    font-size: 30px;
+    font-weight: 100;
+    background-color: brown;
+    text-decoration: underline;
+}
+.box{position:relative;}
+.left{ width: 100px;
+    height: 100px;
+    position:absolute;
+    top:400px; left:10px;
+}
+.center{ width: 100px;
+    height: 100px;position:absolute; top:400px; left:80px;}
+
+.right{ width: 100px;
+    height: 100px;position:absolute; top:400px; left:140px;}
